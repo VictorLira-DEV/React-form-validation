@@ -6,12 +6,15 @@ import './Form.css';
 const Form = function () {
     const [usernameInput, setUsernameInput] = useState('');
     const [usernameIsValid, setUsernameIsValid] = useState(true);
+    const [usernameErrorMessage, setUsernameErrorMessage] = useState('')
 
     const [passwordInput, setPasswordInput] = useState('');
     const [isPasswordValid, setPasswordValid] = useState(true);
+    const [passwordMessage, setPasswordMessage] = useState('')
 
     const [passwordCheck, setPasswordCheck] = useState('');
     const [isPasswordCheckValid, setIsPasswordCheckValid] = useState(true);
+    const [checkPasswordMessage, setCheckPasswordMessage] = useState('');
 
     const [emailCheck, setEmailCheck] = useState('');
     const [isEmailValid, setIsEmailValid] = useState(true)
@@ -64,21 +67,26 @@ const Form = function () {
     function onSubmitHandler(e) {
         e.preventDefault();
         //username
-        if (usernameInput.trim().length < 5) {
+        if (usernameInput.trim().length === 0) {
             setUsernameIsValid(false);
-        }else if (usernameInput.trim().length === 0) {
+            setUsernameErrorMessage('Username cannot be blank');
+        }else if (usernameInput.trim().length < 5) {
             setUsernameIsValid(false);
+            setUsernameErrorMessage('Too short');
         }
         //password
-        if (passwordInput.trim().length < 5) {
+        if (passwordInput.trim().length === 0) {
             setPasswordValid(false)
-        } else if(passwordInput.trim().length === 0){
+            setPasswordMessage('Password cannot be blank')
+        } else if(passwordInput.trim().length < 5){
             setPasswordValid(false);
+            setPasswordMessage('Too short')
         }
 
         //passwordCheck
         if (passwordCheck !== passwordInput || passwordCheck.trim().length === 0) {
             setIsPasswordCheckValid(false)
+            setCheckPasswordMessage("The password doesn't match")
         }
 
         //email
@@ -97,7 +105,7 @@ const Form = function () {
                 className={`formControl ${!usernameIsValid ? 'Invalid' : ''}`}
                 type="text"
                 onChangeHandler={onUsername}
-                errorMessage={`${usernameInput.trim().length === 0 ? 'username cannot be blank' : 'too short'}`}
+                errorMessage={`${usernameErrorMessage}`}
                 id="username" >
                 Username
             </FormInput>
@@ -115,7 +123,7 @@ const Form = function () {
                 className={`formControl ${!isPasswordValid ? 'Invalid' : ''}`}
                 type="password"
                 onChangeHandler={onPassword}
-                errorMessage={`${passwordInput.trim().length === 0 ? 'username cannot be blank' : 'too short'}`}
+                errorMessage={`${passwordMessage}`}
                 id="password" >
                 Password
             </FormInput>
@@ -124,7 +132,7 @@ const Form = function () {
                 className={`formControl ${!isPasswordCheckValid ? 'Invalid' : ''}`}
                 type="password"
                 onChangeHandler={checkPassword}
-                errorMessage="The password doesn't match"
+                errorMessage={checkPasswordMessage}
                 id="passwordCheck" >
                 Password Check
             </FormInput>

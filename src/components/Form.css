@@ -14,7 +14,8 @@ form h2{
 .formControl{
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
+    position: relative;
 }
 
 .formControl label{
@@ -28,6 +29,8 @@ form h2{
 }
 
 .formControl small{
+    position: absolute;
+    bottom: -16px;
     visibility: hidden;
 }
 
