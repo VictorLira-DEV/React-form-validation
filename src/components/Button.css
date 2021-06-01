@@ -7,4 +7,9 @@ button{
     border: 1px solid rgb(83, 1, 83);
     color: white;
     cursor: pointer;
+    transition: .4s;
+}
+
+button:hover{
+    background: rgb(99, 0, 99);
 }
