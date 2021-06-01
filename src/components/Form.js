@@ -70,9 +70,12 @@ const Form = function () {
             setUsernameIsValid(false);
         }
         //password
-        if (passwordInput.trim().length === 0) {
+        if (passwordInput.trim().length < 5) {
             setPasswordValid(false)
+        } else if(passwordInput.trim().length === 0){
+            setPasswordValid(false);
         }
+
         //passwordCheck
         if (passwordCheck !== passwordInput || passwordCheck.trim().length === 0) {
             setIsPasswordCheckValid(false)
@@ -94,6 +97,7 @@ const Form = function () {
                 className={`formControl ${!usernameIsValid ? 'Invalid' : ''}`}
                 type="text"
                 onChangeHandler={onUsername}
+                errorMessage={`${usernameInput.trim().length === 0 ? 'username cannot be blank' : 'too short'}`}
                 id="username" >
                 Username
             </FormInput>
@@ -102,22 +106,25 @@ const Form = function () {
                 className={`formControl ${!isEmailValid ? 'Invalid' : ''}`}
                 type="email"
                 onChangeHandler={emailValidation}
+                errorMessage="invalid E-mail address"
                 id="email" >
                 Email
             </FormInput>
 
             <FormInput
                 className={`formControl ${!isPasswordValid ? 'Invalid' : ''}`}
-                type="number"
+                type="password"
                 onChangeHandler={onPassword}
+                errorMessage={`${passwordInput.trim().length === 0 ? 'username cannot be blank' : 'too short'}`}
                 id="password" >
                 Password
             </FormInput>
             
             <FormInput
                 className={`formControl ${!isPasswordCheckValid ? 'Invalid' : ''}`}
-                type="number"
+                type="password"
                 onChangeHandler={checkPassword}
+                errorMessage="The password doesn't match"
                 id="passwordCheck" >
                 Password Check
             </FormInput>

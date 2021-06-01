@@ -1,3 +1,5 @@
+import ErrorMessage from './ErrorMessage'
+
 function FormInput(props) {
     return (
         <div className={props.className}>
@@ -7,7 +9,7 @@ function FormInput(props) {
                 id={props.id}
                 onChange={props.onChangeHandler}
             />
-            <small>error message</small>
+            <ErrorMessage>{ props.errorMessage }</ErrorMessage>
         </div>
     )
 }
