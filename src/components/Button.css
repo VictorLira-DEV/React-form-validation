@@ -1,15 +1,17 @@
 button{
+    background-color: #8e44ad;
+    border: 2px solid #8e44ad;
+    color: #fff;
+    display: block;
     width: 100%;
     padding: 10px;
-    margin-top: 20px;
+    border-radius: 4px;
     font-size: 16px;
-    background: purple;
-    border: 1px solid rgb(83, 1, 83);
-    color: white;
+    margin-top: 30px;
+    transition: .5s;
     cursor: pointer;
-    transition: .6s;
 }
 
 button:hover{
-    background: rgb(99, 0, 99);
+    background-color: #783496;
 }

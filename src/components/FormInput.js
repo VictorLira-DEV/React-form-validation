@@ -8,6 +8,7 @@ function FormInput(props) {
                 type={props.type}
                 id={props.id}
                 onChange={props.onChangeHandler}
+                placeholder={props.placeholder}
             />
             <ErrorMessage>{ props.errorMessage }</ErrorMessage>
         </div>

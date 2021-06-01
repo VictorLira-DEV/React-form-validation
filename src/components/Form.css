@@ -1,14 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 form{
     border: 1px solid #ccc;
-    padding: 20px;
+    background: white;
+    padding: 30px 40px;
     width: 400px;
     font-size: 16px;
     border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 form h2{
-    margin-bottom: 15px;
-    color: rgb(97, 96, 96);
+    margin-bottom: 30px;
+    color: rgb(68, 68, 68);
 }
 
 .formControl{
@@ -26,11 +37,12 @@ form h2{
 .formControl input{
     padding: 10px;
     border: 1px solid #ccc;
+    outline: none;
 }
 
 .formControl small{
     position: absolute;
-    bottom: -16px;
+    bottom: -19px;
     visibility: hidden;
 }
 
