@@ -30,7 +30,7 @@ const Form = function () {
             setUsernameErrorMessage('Username cannot be blank');
         }else if (usernameInput.trim().length < 5) {
             setUsernameIsValid(false);
-            setUsernameErrorMessage('Too short');
+            setUsernameErrorMessage('Short username');
         } else if (usernameInput.trim().length >= 5) {
             setUsernameIsValid(true);
         }
@@ -40,8 +40,8 @@ const Form = function () {
     }
 
     //Is email
-    function isEmailTrue(){
-        return (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(emailCheck))
+    function isEmailTrue(email){
+        return (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email))
    }
 
     //emailCheck
@@ -49,13 +49,13 @@ const Form = function () {
         e.preventDefault();
         setEmailCheck(e.target.value.trim());
 
-        if (emailCheck.trim().length < 5) {
+        if (!isEmailTrue(emailCheck.trim())) {
             setIsEmailValid(false)
-            setEmailErrorMessage('Too short')
+            setEmailErrorMessage('Invalid E-mail')
         } else {
             setIsEmailValid(true)
         }
-        setEmailCheck(e.target.value);
+        setEmailCheck(e.target.value.trim());
     }
 
 
@@ -69,7 +69,7 @@ const Form = function () {
             setPasswordMessage('Password cannot be blank')
         } else if(passwordInput.trim().length < 5){
             setPasswordValid(false);
-            setPasswordMessage('Too short')
+            setPasswordMessage('Weak password')
         } else if (passwordInput.trim().length >= 5) {
             setPasswordValid(true)
         }
@@ -83,7 +83,7 @@ const Form = function () {
 
         if (passwordCheck.trim().length < 5) {
             setIsPasswordCheckValid(false)
-            setCheckPasswordMessage('Too short')
+            setCheckPasswordMessage('Weak password')
         } else {
             setIsPasswordCheckValid(true)
         }
@@ -99,7 +99,7 @@ const Form = function () {
             setUsernameErrorMessage('Username cannot be blank');
         }else if (usernameInput.trim().length < 5) {
             setUsernameIsValid(false);
-            setUsernameErrorMessage('Too short');
+            setUsernameErrorMessage('Short username');
         }
         //password
         if (passwordInput.trim().length === 0) {
@@ -107,7 +107,7 @@ const Form = function () {
             setPasswordMessage('Password cannot be blank')
         } else if(passwordInput.trim().length < 5){
             setPasswordValid(false);
-            setPasswordMessage('Too short')
+            setPasswordMessage('Weak password')
         }
 
         //passwordCheck
