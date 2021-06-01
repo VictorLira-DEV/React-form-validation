@@ -1,0 +1,46 @@
+form{
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 400px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+form h2{
+    margin-bottom: 15px;
+    color: rgb(97, 96, 96);
+}
+
+.formControl{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.formControl label{
+    display: inline-block;
+    margin-bottom: 3px;
+}
+
+.formControl input{
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.formControl small{
+    visibility: hidden;
+}
+
+.formControl.Invalid label{
+    color: red;
+}
+
+.formControl.Invalid input{
+    border: 1px solid red;
+    background: rgb(255, 232, 232);
+}
+
+.formControl.Invalid small{
+    color: red; 
+    visibility: visible;
+}
