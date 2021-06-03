@@ -168,7 +168,7 @@ const Form = function () {
                 id="passwordCheck" >
                 Password Check
             </FormInput>
-            <Button>Submit</Button>
+            <Button type="submit">Sumbmit</Button>
         </form>
     )
 }
