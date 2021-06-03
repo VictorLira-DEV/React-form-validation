@@ -1,9 +1,42 @@
 import { useState } from 'react';
 import Button from './Button';
-import FormInput from './FormInput'
-import './Form.css';
+import FormInput from './FormInput';
+import styled from 'styled-components';
 
-const Form = function () {
+
+const Form = styled.form`
+    border: 1px solid #ccc;
+    background: white;
+    padding: 30px 40px;
+    width: 400px;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+
+    & h2{
+        margin-bottom: 30px;
+        color: rgb(68, 68, 68);
+    }
+
+
+
+
+    /* .formControl.Invalid label{
+        color: red;
+    }
+
+    .formControl.Invalid input{
+        border: 1px solid red;
+        background: rgb(255, 232, 232);
+    }
+
+    .formControl.Invalid small{
+        color: red; 
+        visibility: visible;
+    } */
+`
+
+const FormValidation = function (props) {
     const [usernameInput, setUsernameInput] = useState('');
     const [usernameErrorMessage, setUsernameErrorMessage] = useState('')
     const [usernameIsValid, setUsernameIsValid] = useState(true);
@@ -127,20 +160,25 @@ const Form = function () {
     
 
     return (
-        <form onSubmit={onSubmitHandler}>
+        <Form onSubmit={onSubmitHandler}>
             <h2>Create account</h2>
             <FormInput
-                className={`formControl ${!usernameIsValid ? 'Invalid' : ''}`}
+                key='username'
+                className={`formControl`}
+                booleano={!usernameIsValid}
                 type="text"
                 onChangeHandler={onUsername}
                 placeholder='username'
                 errorMessage={`${usernameErrorMessage}`}
                 id="username" >
                 Username
+            
             </FormInput>
 
             <FormInput
-                className={`formControl ${!isEmailValid ? 'Invalid' : ''}`}
+                key='lat'
+                className={`formControl`}
+                booleano={!isEmailValid}
                 type="email"
                 onChangeHandler={emailValidation}
                 placeholder='example@gmail.com'
@@ -150,7 +188,9 @@ const Form = function () {
             </FormInput>
 
             <FormInput
-                className={`formControl ${!isPasswordValid ? 'Invalid' : ''}`}
+                key="ok"
+                className={`formControl`}
+                booleano={!isPasswordValid}
                 type="password"
                 onChangeHandler={onPassword}
                 placeholder='password'
@@ -160,7 +200,8 @@ const Form = function () {
             </FormInput>
             
             <FormInput
-                className={`formControl ${!isPasswordCheckValid ? 'Invalid' : ''}`}
+                className={`formControl`}
+                booleano={!isPasswordCheckValid}
                 type="password"
                 onChangeHandler={checkPassword}
                 errorMessage={checkPasswordMessage}
@@ -169,8 +210,8 @@ const Form = function () {
                 Password Check
             </FormInput>
             <Button type="submit">Sumbmit</Button>
-        </form>
+        </Form>
     )
 }
 
-export default Form;
+export default FormValidation;
