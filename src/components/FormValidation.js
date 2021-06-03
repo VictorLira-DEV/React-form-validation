@@ -18,22 +18,6 @@ const Form = styled.form`
         color: rgb(68, 68, 68);
     }
 
-
-
-
-    /* .formControl.Invalid label{
-        color: red;
-    }
-
-    .formControl.Invalid input{
-        border: 1px solid red;
-        background: rgb(255, 232, 232);
-    }
-
-    .formControl.Invalid small{
-        color: red; 
-        visibility: visible;
-    } */
 `
 
 const FormValidation = function (props) {
@@ -209,7 +193,7 @@ const FormValidation = function (props) {
                 id="passwordCheck" >
                 Password Check
             </FormInput>
-            <Button type="submit">Sumbmit</Button>
+            <Button type="submit">Submit</Button>
         </Form>
     )
 }

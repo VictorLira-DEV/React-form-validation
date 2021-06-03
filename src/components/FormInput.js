@@ -10,19 +10,20 @@ const FormControl_styled = styled.div`
     & label{
         display: inline-block;
         margin-bottom: 3px;
-        color: ${props => (props.isvalid ? 'red' : 'black')}
+        color: rgb(68, 68, 68);
     }
 
     & input{
         padding: 10px;
-        border: 1px solid ${props => (props.isvalid ? 'red' : 'black')};
+        border: 1px solid ${props => (props.isvalid ? 'red' : '#ccc')};
         outline: none;
     }
 
     & small{
         position: absolute;
-        bottom: -19px;
-        visibility: hidden;
+        bottom: -20px;
+        color: red;
+        visibility: ${props => (props.isvalid ? 'visible' : 'hidden')};
     }
 `
 
