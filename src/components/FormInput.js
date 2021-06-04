@@ -15,7 +15,7 @@ const FormControl = styled.div`
 
     & input{
         padding: 10px;
-        border: 1px solid ${props => (props.isvalid ? 'red' : 'blue')};
+        border: 1px solid ${props => (props.isvalid ? 'red' : '#ccc')};
         outline: none;
     }
 

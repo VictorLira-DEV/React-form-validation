@@ -3,7 +3,6 @@ import Button from './Button';
 import FormInput from './FormInput';
 import styled from 'styled-components';
 
-
 const Form = styled.form`
     border: 1px solid #ccc;
     background: white;
@@ -27,17 +26,22 @@ const FormValidation = function () {
         usernameIsValid: true,
     });
 
-    const [passwordInput, setPasswordInput] = useState('');
-    const [passwordMessage, setPasswordMessage] = useState('')
-    const [isPasswordValid, setPasswordValid] = useState(true);
+    const [emailCheck, setEmailCheck] = useState({
+        emailInput: '',
+        emailErrorMessage: '',
+        IsEmailValid: true
+    });
 
+    const [passwordInfo, setPasswordInfo] = useState({
+        passwordInput: '',
+        passwordErrorMessage: '',
+        isPasswordValid: true
+    });
+    
     const [passwordCheck, setPasswordCheck] = useState('');
     const [checkPasswordMessage, setCheckPasswordMessage] = useState('');
     const [isPasswordCheckValid, setIsPasswordCheckValid] = useState(true);
 
-    const [emailCheck, setEmailCheck] = useState('');
-    const [emailErrorMessage, setEmailErrorMessage] = useState('');
-    const [isEmailValid, setIsEmailValid] = useState(true);
 
     //usernameCheck
     function onUsername(e) {
@@ -72,34 +76,54 @@ const FormValidation = function () {
     //emailCheck
     function emailValidation(e) {
         e.preventDefault();
-        setEmailCheck(e.target.value.trim());
+        setEmailCheck({
+            ...emailCheck,
+            emailInput: e.target.value.trim()
+        });
 
-        if (!isEmailTrue(emailCheck.trim())) {
-            setIsEmailValid(false)
-            setEmailErrorMessage('Invalid E-mail')
+        if (!isEmailTrue(emailCheck.emailInput)) {
+            setEmailCheck({
+                emailErrorMessage: 'invalid E-mail address',
+                emailInput: e.target.value,
+                IsEmailValid: false
+            })
         } else {
-            setIsEmailValid(true)
+            setEmailCheck({
+                emailErrorMessage: '',
+                emailInput: e.target.value,
+                IsEmailValid: true
+            })
         }
-        setEmailCheck(e.target.value.trim());
     }
 
 
 
     //password
     function onPassword(e) {
-        setPasswordInput(e.target.value.trim());
+        setPasswordInfo({
+            ...passwordInfo,
+            passwordInput: e.target.value.trim()
+        });
 
-        if (passwordInput.trim().length === 0) {
-            setPasswordValid(false)
-            setPasswordMessage('Password cannot be blank')
-        } else if(passwordInput.trim().length < 5){
-            setPasswordValid(false);
-            setPasswordMessage('Weak password')
-        } else if (passwordInput.trim().length >= 5) {
-            setPasswordValid(true)
+        if (passwordInfo.passwordInput.length === 0) {
+            setPasswordInfo({
+                passwordInput: e.target.value,
+                isPasswordValid: false,
+                passwordErrorMessage: 'Password cannot be blank'
+            })
+        } else if(passwordInfo.passwordInput.trim().length < 5){
+            setPasswordInfo({
+                passwordInput: e.target.value,
+                isPasswordValid: false,
+                passwordErrorMessage: 'Weak password'
+            });
+        } else if (passwordInfo.passwordInput.trim().length >= 5) {
+            setPasswordInfo({
+                passwordErrorMessage: '',
+                passwordInput: e.target.value,
+                isPasswordValid: true
+            })
         }
-
-        setPasswordInput(e.target.value);
     }
 
     //Check password
@@ -137,26 +161,37 @@ const FormValidation = function () {
                 usernameIsValid: true
             })
         }
+
+        //email
+        if (emailCheck.emailInput.length < 5) {
+            setEmailCheck({
+                ...emailCheck,
+                emailErrorMessage: 'invalid E-mail address',
+                IsEmailValid: false
+            })
+        }
+
         //password
-        if (passwordInput.trim().length === 0) {
-            setPasswordValid(false)
-            setPasswordMessage('Password cannot be blank')
-        } else if(passwordInput.trim().length < 5){
-            setPasswordValid(false);
-            setPasswordMessage('Weak password')
+        if (passwordInfo.passwordInput.length === 0) {
+            setPasswordInfo({
+                ...passwordInfo,
+                passwordErrorMessage: 'Password cannot be blank',
+                isPasswordValid: false,
+            })
+        } else if(passwordInfo.passwordInput.trim().length < 5){
+            setPasswordInfo({
+                ...passwordInfo,
+                passwordErrorMessage: 'Weak password',
+                isPasswordValid: false,
+            })
         }
 
         //passwordCheck
-        if (passwordCheck !== passwordInput || passwordCheck.trim().length === 0) {
+        if (passwordCheck !== passwordInfo.passwordInput || passwordCheck.trim().length === 0) {
             setIsPasswordCheckValid(false)
             setCheckPasswordMessage("The password doesn't match")
         }
 
-        //email
-        if (emailCheck.trim().length < 5) {
-            setIsEmailValid(false)
-            setEmailErrorMessage('invalid E-mail address')
-        }
 
     }
 
@@ -169,7 +204,7 @@ const FormValidation = function () {
                 booleano={!usernameInfo.usernameIsValid}
                 type="text"
                 onChangeHandler={onUsername}
-                placeholder={usernameInfo.usernameInput}
+                placeholder='Username'
                 errorMessage={`${usernameInfo.usernameErrorMessage}`}
                 id="username" >
                 Username
@@ -179,11 +214,11 @@ const FormValidation = function () {
             <FormInput
                 key='lat'
                 className={`formControl`}
-                booleano={!isEmailValid}
+                booleano={!emailCheck.IsEmailValid}
                 type="email"
                 onChangeHandler={emailValidation}
                 placeholder='example@gmail.com'
-                errorMessage={emailErrorMessage}
+                errorMessage={emailCheck.emailErrorMessage}
                 id="email" >
                 E-mail
             </FormInput>
@@ -191,11 +226,11 @@ const FormValidation = function () {
             <FormInput
                 key="ok"
                 className={`formControl`}
-                booleano={!isPasswordValid}
+                booleano={!passwordInfo.isPasswordValid}
                 type="password"
                 onChangeHandler={onPassword}
                 placeholder='password'
-                errorMessage={`${passwordMessage}`}
+                errorMessage={`${passwordInfo.passwordErrorMessage}`}
                 id="password" >
                 Password
             </FormInput>
