@@ -1,7 +1,7 @@
 import ErrorMessage from './ErrorMessage';
 import styled from 'styled-components';
 
-const FormControl_styled = styled.div`
+const FormControl = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 25px;
@@ -15,7 +15,7 @@ const FormControl_styled = styled.div`
 
     & input{
         padding: 10px;
-        border: 1px solid ${props => (props.isvalid ? 'red' : '#ccc')};
+        border: 1px solid ${props => (props.isvalid ? 'red' : 'blue')};
         outline: none;
     }
 
@@ -29,7 +29,7 @@ const FormControl_styled = styled.div`
 
 function FormInput(props) {
     return (
-        <FormControl_styled isvalid={props.booleano}>
+        <FormControl isvalid={props.booleano}>
             <label for={props.id}>{props.children}</label>
             <input
                 type={props.type}
@@ -38,7 +38,7 @@ function FormInput(props) {
                 placeholder={props.placeholder}
             />
             <ErrorMessage>{ props.errorMessage }</ErrorMessage>
-        </FormControl_styled>
+        </FormControl>
     )
 }
 export default FormInput;

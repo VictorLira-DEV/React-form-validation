@@ -20,10 +20,12 @@ const Form = styled.form`
 
 `
 
-const FormValidation = function (props) {
-    const [usernameInput, setUsernameInput] = useState('');
-    const [usernameErrorMessage, setUsernameErrorMessage] = useState('')
-    const [usernameIsValid, setUsernameIsValid] = useState(true);
+const FormValidation = function () {
+    const [usernameInfo, setUsernameInput] = useState({
+        usernameInput: '',
+        usernameErrorMessage: '',
+        usernameIsValid: true,
+    });
 
     const [passwordInput, setPasswordInput] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('')
@@ -40,20 +42,26 @@ const FormValidation = function (props) {
     //usernameCheck
     function onUsername(e) {
         e.preventDefault();
-        setUsernameInput(e.target.value.trim());
 
-        if (usernameInput.trim().length === 0) {
-            setUsernameIsValid(false);
-            setUsernameErrorMessage('Username cannot be blank');
-        }else if (usernameInput.trim().length < 5) {
-            setUsernameIsValid(false);
-            setUsernameErrorMessage('Short username');
-        } else if (usernameInput.trim().length >= 5) {
-            setUsernameIsValid(true);
+        setUsernameInput({
+            ...usernameInfo,
+            usernameInput: e.target.value
+        });
+
+        if (usernameInfo.usernameInput.trim().length === 0 || usernameInfo.usernameInput.trim().length < 5) {
+            setUsernameInput({
+                usernameInput: e.target.value,
+                usernameErrorMessage: 'Too short',
+                usernameIsValid: false
+            });
+        } else {
+            setUsernameInput({
+                usernameInput: e.target.value,
+                usernameErrorMessage: '',
+                usernameIsValid: true
+            });
         }
-        
-        setUsernameInput(e.target.value);
-        
+
     }
 
     //Is email
@@ -111,12 +119,23 @@ const FormValidation = function (props) {
     function onSubmitHandler(e) {
         e.preventDefault();
         //username
-        if (usernameInput.trim().length === 0) {
-            setUsernameIsValid(false);
-            setUsernameErrorMessage('Username cannot be blank');
-        }else if (usernameInput.trim().length < 5) {
-            setUsernameIsValid(false);
-            setUsernameErrorMessage('Short username');
+        if (usernameInfo.usernameInput.trim().length === 0) {
+            setUsernameInput({
+                ...usernameInfo,
+                usernameErrorMessage: 'Username cannot be blank',
+                usernameIsValid: false
+            });
+        } else if (usernameInfo.usernameInput.trim().length < 5) {
+            setUsernameInput({
+                ...usernameInfo,
+                usernameErrorMessage: 'Too short',
+                usernameIsValid: false
+            })
+        } else {
+            setUsernameInput({
+                ...usernameInfo,
+                usernameIsValid: true
+            })
         }
         //password
         if (passwordInput.trim().length === 0) {
@@ -141,19 +160,17 @@ const FormValidation = function (props) {
 
     }
 
-    
-
     return (
         <Form onSubmit={onSubmitHandler}>
-            <h2>Create account</h2>
+            <h2>{ usernameInfo.usernameIsValid }</h2>
             <FormInput
                 key='username'
                 className={`formControl`}
-                booleano={!usernameIsValid}
+                booleano={!usernameInfo.usernameIsValid}
                 type="text"
                 onChangeHandler={onUsername}
-                placeholder='username'
-                errorMessage={`${usernameErrorMessage}`}
+                placeholder={usernameInfo.usernameInput}
+                errorMessage={`${usernameInfo.usernameErrorMessage}`}
                 id="username" >
                 Username
             
@@ -184,6 +201,7 @@ const FormValidation = function (props) {
             </FormInput>
             
             <FormInput
+                key="lll"
                 className={`formControl`}
                 booleano={!isPasswordCheckValid}
                 type="password"
