@@ -20,52 +20,52 @@ const Form = styled.form`
 `
 
 const FormValidation = function () {
-    const [usernameInfo, setUsernameInput] = useState({
-        usernameInput: '',
-        usernameErrorMessage: '',
+    const [usernameInfo, setUsernameInfo] = useState({
+        usernameInput:'',
+        usernameErrorMessage:'',
         usernameIsValid: true,
     });
 
-    const [emailCheck, setEmailCheck] = useState({
+    const [emailInfo, setEmailInfo] = useState({
         emailInput: '',
         emailErrorMessage: '',
         IsEmailValid: true
     });
 
+    
+    const [passwordCheckInfo, setPasswordCheckInfo] = useState({
+        passwordCheckInput: '',
+        passwordCheckErrorMessage: '',
+        isPasswordCheckValid: true
+    });
+    
     const [passwordInfo, setPasswordInfo] = useState({
         passwordInput: '',
         passwordErrorMessage: '',
         isPasswordValid: true
     });
-    
-    const [passwordCheck, setPasswordCheck] = useState('');
-    const [checkPasswordMessage, setCheckPasswordMessage] = useState('');
-    const [isPasswordCheckValid, setIsPasswordCheckValid] = useState(true);
-
-
     //usernameCheck
     function onUsername(e) {
         e.preventDefault();
-
-        setUsernameInput({
+        
+        setUsernameInfo({
             ...usernameInfo,
             usernameInput: e.target.value
         });
-
         if (usernameInfo.usernameInput.trim().length === 0 || usernameInfo.usernameInput.trim().length < 5) {
-            setUsernameInput({
+            setUsernameInfo({
                 usernameInput: e.target.value,
                 usernameErrorMessage: 'Too short',
                 usernameIsValid: false
             });
         } else {
-            setUsernameInput({
+            setUsernameInfo({
                 usernameInput: e.target.value,
                 usernameErrorMessage: '',
                 usernameIsValid: true
             });
         }
-
+        
     }
 
     //Is email
@@ -76,19 +76,19 @@ const FormValidation = function () {
     //emailCheck
     function emailValidation(e) {
         e.preventDefault();
-        setEmailCheck({
-            ...emailCheck,
+        setEmailInfo({
+            ...emailInfo,
             emailInput: e.target.value.trim()
         });
 
-        if (!isEmailTrue(emailCheck.emailInput)) {
-            setEmailCheck({
+        if (!isEmailTrue(emailInfo.emailInput)) {
+            setEmailInfo({
                 emailErrorMessage: 'invalid E-mail address',
                 emailInput: e.target.value,
                 IsEmailValid: false
             })
         } else {
-            setEmailCheck({
+            setEmailInfo({
                 emailErrorMessage: '',
                 emailInput: e.target.value,
                 IsEmailValid: true
@@ -96,22 +96,16 @@ const FormValidation = function () {
         }
     }
 
-
-
     //password
     function onPassword(e) {
+        e.preventDefault();
+        
         setPasswordInfo({
             ...passwordInfo,
-            passwordInput: e.target.value.trim()
+            passwordInput: e.target.value
         });
 
-        if (passwordInfo.passwordInput.length === 0) {
-            setPasswordInfo({
-                passwordInput: e.target.value,
-                isPasswordValid: false,
-                passwordErrorMessage: 'Password cannot be blank'
-            })
-        } else if(passwordInfo.passwordInput.trim().length < 5){
+         if(passwordInfo.passwordInput.trim().length < 5){
             setPasswordInfo({
                 passwordInput: e.target.value,
                 isPasswordValid: false,
@@ -119,8 +113,8 @@ const FormValidation = function () {
             });
         } else if (passwordInfo.passwordInput.trim().length >= 5) {
             setPasswordInfo({
-                passwordErrorMessage: '',
                 passwordInput: e.target.value,
+                passwordErrorMessage: '',
                 isPasswordValid: true
             })
         }
@@ -128,76 +122,103 @@ const FormValidation = function () {
 
     //Check password
     function checkPassword(e) {
-        setPasswordCheck(e.target.value.trim())
+        e.preventDefault();
 
-        if (passwordCheck.trim().length < 5) {
-            setIsPasswordCheckValid(false)
-            setCheckPasswordMessage('Weak password')
-        } else {
-            setIsPasswordCheckValid(true)
+        setPasswordCheckInfo({
+            ...passwordCheckInfo,
+            passwordCheckInput: e.target.value
+        })
+
+        if (passwordCheckInfo.passwordCheckInput.length < 5 ) {
+            setPasswordCheckInfo({
+                passwordCheckInput: e.target.value,
+                isPasswordCheckValid: false,
+                passwordCheckErrorMessage: "weak password"
+            });
+        } else if(passwordCheckInfo.passwordCheckInput.length >= 5){
+            setPasswordCheckInfo({
+                ...passwordCheckInfo,
+                passwordCheckInput: e.target.value,
+                isPasswordCheckValid: true,
+            })
+
         }
-        setPasswordCheck(e.target.value);
+
     }
 
     //onSubmitFunction
     function onSubmitHandler(e) {
         e.preventDefault();
         //username
+
+        setUsernameInfo({
+            ...usernameInfo,
+            usernameInput: e.target.value
+        })
+
         if (usernameInfo.usernameInput.trim().length === 0) {
-            setUsernameInput({
+            setUsernameInfo({
                 ...usernameInfo,
                 usernameErrorMessage: 'Username cannot be blank',
                 usernameIsValid: false
             });
         } else if (usernameInfo.usernameInput.trim().length < 5) {
-            setUsernameInput({
+            setUsernameInfo({
                 ...usernameInfo,
                 usernameErrorMessage: 'Too short',
                 usernameIsValid: false
             })
         } else {
-            setUsernameInput({
+            setUsernameInfo({
                 ...usernameInfo,
                 usernameIsValid: true
             })
         }
 
         //email
-        if (emailCheck.emailInput.length < 5) {
-            setEmailCheck({
-                ...emailCheck,
+        if (emailInfo.emailInput.length < 5) {
+            setEmailInfo({
+                ...emailInfo,
                 emailErrorMessage: 'invalid E-mail address',
                 IsEmailValid: false
             })
         }
 
         //password
-        if (passwordInfo.passwordInput.length === 0) {
+        if(passwordInfo.passwordInput.trim().length < 5){
             setPasswordInfo({
                 ...passwordInfo,
-                passwordErrorMessage: 'Password cannot be blank',
                 isPasswordValid: false,
-            })
-        } else if(passwordInfo.passwordInput.trim().length < 5){
-            setPasswordInfo({
-                ...passwordInfo,
                 passwordErrorMessage: 'Weak password',
-                isPasswordValid: false,
+            })
+        } else {
+            setPasswordInfo({
+                ...passwordInfo,
+                isPasswordValid: true,
+                passwordErrorMessage: '',
             })
         }
 
         //passwordCheck
-        if (passwordCheck !== passwordInfo.passwordInput || passwordCheck.trim().length === 0) {
-            setIsPasswordCheckValid(false)
-            setCheckPasswordMessage("The password doesn't match")
+        if (passwordCheckInfo.passwordCheckInput != passwordInfo.passwordInput || passwordCheckInfo.passwordCheckInput.length < 5) {
+            setPasswordCheckInfo({
+                ...passwordCheckInfo,
+                isPasswordCheckValid: false,
+                passwordCheckErrorMessage: "The password doesn't match"
+            })
+        } else {
+            setPasswordCheckInfo({
+                ...passwordCheckInfo,
+                isPasswordCheckValid: true,
+                passwordCheckErrorMessage: "The password doesn't match"
+            })
         }
-
 
     }
 
     return (
         <Form onSubmit={onSubmitHandler}>
-            <h2>{ usernameInfo.usernameIsValid }</h2>
+            <h2> Create account </h2>
             <FormInput
                 key='username'
                 className={`formControl`}
@@ -214,11 +235,11 @@ const FormValidation = function () {
             <FormInput
                 key='lat'
                 className={`formControl`}
-                booleano={!emailCheck.IsEmailValid}
+                booleano={!emailInfo.IsEmailValid}
                 type="email"
                 onChangeHandler={emailValidation}
                 placeholder='example@gmail.com'
-                errorMessage={emailCheck.emailErrorMessage}
+                errorMessage={emailInfo.emailErrorMessage}
                 id="email" >
                 E-mail
             </FormInput>
@@ -238,10 +259,10 @@ const FormValidation = function () {
             <FormInput
                 key="lll"
                 className={`formControl`}
-                booleano={!isPasswordCheckValid}
+                booleano={!passwordCheckInfo.isPasswordCheckValid}
                 type="password"
                 onChangeHandler={checkPassword}
-                errorMessage={checkPasswordMessage}
+                errorMessage={passwordCheckInfo.passwordCheckErrorMessage}
                 placeholder='password check'
                 id="passwordCheck" >
                 Password Check
