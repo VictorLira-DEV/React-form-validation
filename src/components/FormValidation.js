@@ -198,8 +198,7 @@ const FormValidation = function () {
         } else {
             setPasswordCheckInfo({
                 ...passwordCheckInfo,
-                isPasswordCheckValid: true,
-                passwordCheckErrorMessage: "The password doesn't match"
+                isPasswordCheckValid: true
             })
         }
 
@@ -209,7 +208,6 @@ const FormValidation = function () {
         <Form onSubmit={onSubmitHandler}>
             <h2> Create account </h2>
             <FormInput
-                key='username'
                 className={`formControl`}
                 booleano={!usernameInfo.usernameIsValid}
                 type="text"
@@ -221,7 +219,6 @@ const FormValidation = function () {
             </FormInput>
 
             <FormInput
-                key='lat'
                 className={`formControl`}
                 booleano={!emailInfo.IsEmailValid}
                 type="email"
@@ -233,7 +230,6 @@ const FormValidation = function () {
             </FormInput>
 
             <FormInput
-                key="ok"
                 className={`formControl`}
                 booleano={!passwordInfo.isPasswordValid}
                 type="password"
@@ -245,7 +241,6 @@ const FormValidation = function () {
             </FormInput>
             
             <FormInput
-                key="lll"
                 className={`formControl`}
                 booleano={!passwordCheckInfo.isPasswordCheckValid}
                 type="password"
