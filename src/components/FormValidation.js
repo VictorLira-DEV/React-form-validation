@@ -16,9 +16,7 @@ const Form = styled.form`
         margin-bottom: 30px;
         color: rgb(68, 68, 68);
     }
-
 `
-
 const FormValidation = function () {
     const [usernameInfo, setUsernameInfo] = useState({
         usernameInput:'',
@@ -44,7 +42,7 @@ const FormValidation = function () {
         passwordErrorMessage: '',
         isPasswordValid: true
     });
-    //usernameCheck
+
     function onUsername(e) {
         e.preventDefault();
         
@@ -65,7 +63,6 @@ const FormValidation = function () {
                 usernameIsValid: true
             });
         }
-        
     }
 
     //Is email
@@ -73,7 +70,6 @@ const FormValidation = function () {
         return (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email))
    }
 
-    //emailCheck
     function emailValidation(e) {
         e.preventDefault();
         setEmailInfo({
@@ -96,7 +92,6 @@ const FormValidation = function () {
         }
     }
 
-    //password
     function onPassword(e) {
         e.preventDefault();
         
@@ -120,7 +115,6 @@ const FormValidation = function () {
         }
     }
 
-    //Check password
     function checkPassword(e) {
         e.preventDefault();
 
@@ -146,10 +140,8 @@ const FormValidation = function () {
 
     }
 
-    //onSubmitFunction
     function onSubmitHandler(e) {
         e.preventDefault();
-        //username
 
         setUsernameInfo({
             ...usernameInfo,
@@ -175,7 +167,6 @@ const FormValidation = function () {
             })
         }
 
-        //email
         if (emailInfo.emailInput.length < 5) {
             setEmailInfo({
                 ...emailInfo,
@@ -184,7 +175,6 @@ const FormValidation = function () {
             })
         }
 
-        //password
         if(passwordInfo.passwordInput.trim().length < 5){
             setPasswordInfo({
                 ...passwordInfo,
@@ -199,7 +189,6 @@ const FormValidation = function () {
             })
         }
 
-        //passwordCheck
         if (passwordCheckInfo.passwordCheckInput != passwordInfo.passwordInput || passwordCheckInfo.passwordCheckInput.length < 5) {
             setPasswordCheckInfo({
                 ...passwordCheckInfo,
@@ -229,7 +218,6 @@ const FormValidation = function () {
                 errorMessage={`${usernameInfo.usernameErrorMessage}`}
                 id="username" >
                 Username
-            
             </FormInput>
 
             <FormInput
