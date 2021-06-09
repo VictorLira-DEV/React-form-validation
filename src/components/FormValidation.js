@@ -87,24 +87,41 @@ const FormValidation = function () {
 
     function emailValidation(e) {
         e.preventDefault();
-        setEmailInfo({
-            ...emailInfo,
-            emailInput: e.target.value.trim()
+        setEmailInfo((emailInformation) => {
+            const currentEmailInput = {
+                ...emailInformation,
+                emailInput: e.target.value
+            }
+            return currentEmailInput
         });
 
         if (!isEmailTrue(emailInfo.emailInput)) {
-            setEmailInfo({
-                emailErrorMessage: 'invalid E-mail address',
-                emailInput: e.target.value,
-                IsEmailValid: false
+            setEmailInfo((emailInformation) => {
+                let currentEmailInput = {
+                    ...emailInformation,
+                    emailErrorMessage: 'Invalid E-mail address',
+                    IsEmailValid: false
+                }
+                return currentEmailInput
             })
         } else {
-            setEmailInfo({
-                emailErrorMessage: '',
-                emailInput: e.target.value,
-                IsEmailValid: true
+            setEmailInfo((emailInformation) => {
+                const currentEmailInput = {
+                    ...emailInformation,
+                    IsEmailValid: true
+                }
+
+                return currentEmailInput;
             })
         }
+
+        setEmailInfo((emailInformation) => {
+            const currentEmailInput = {
+                ...emailInformation,
+                emailInput: e.target.value
+            }
+            return currentEmailInput
+        });
     }
 
     function onPassword(e) {
