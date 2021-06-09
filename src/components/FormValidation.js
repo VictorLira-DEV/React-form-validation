@@ -150,47 +150,73 @@ const FormValidation = function () {
     function checkPassword(e) {
         e.preventDefault();
 
-        setPasswordCheckInfo({
-            ...passwordCheckInfo,
-            passwordCheckInput: e.target.value
+        setPasswordCheckInfo((passwordInformations) => {
+            const currentPasswordInformations = {
+                ...passwordInformations,
+                passwordCheckInput: e.target.value
+            }
+            return currentPasswordInformations
         })
 
         if (passwordCheckInfo.passwordCheckInput.length < 5 ) {
-            setPasswordCheckInfo({
-                passwordCheckInput: e.target.value,
-                isPasswordCheckValid: false,
-                passwordCheckErrorMessage: "weak password"
+            setPasswordCheckInfo((passwordInformations) => {
+                const currentPasswordInformations = {
+                    ...passwordInformations,
+                    isPasswordCheckValid: false,
+                    passwordCheckErrorMessage: 'weak password'
+                }
+                return currentPasswordInformations;
             });
-        } else if(passwordCheckInfo.passwordCheckInput.length >= 5){
-            setPasswordCheckInfo({
-                ...passwordCheckInfo,
-                passwordCheckInput: e.target.value,
-                isPasswordCheckValid: true,
-            })
 
+        } else if(passwordCheckInfo.passwordCheckInput.length >= 5){
+            setPasswordCheckInfo((passwordInformations) => {
+                const currentPasswordInformations = {
+                    ...passwordInformations,
+                    isPasswordCheckValid: true
+                }
+                return currentPasswordInformations
+            })
         }
+
+        setPasswordCheckInfo((passwordInformations) => {
+            const currentPasswordInformations = {
+                ...passwordInformations,
+                passwordCheckInput: e.target.value
+            }
+            return currentPasswordInformations
+        })
 
     }
 
     function onSubmitHandler(e) {
         e.preventDefault();
 
-        setUsernameInfo({
-            ...usernameInfo,
-            usernameInput: e.target.value
+        setUsernameInfo((usernameInformations) => {
+            const currentUsernameInformations = {
+                ...usernameInformations,
+                usernameInput: e.target.value
+            }
+            return currentUsernameInformations;
         })
 
         if (usernameInfo.usernameInput.trim().length === 0) {
-            setUsernameInfo({
-                ...usernameInfo,
-                usernameErrorMessage: 'Username cannot be blank',
-                usernameIsValid: false
+            setUsernameInfo((usernameInformations) => {
+                const currentUsernameInformations = {
+                    ...usernameInformations,
+                    usernameIsValid: e.target.value
+                }
+                
+                return currentUsernameInformations
             });
         } else if (usernameInfo.usernameInput.trim().length < 5) {
-            setUsernameInfo({
-                ...usernameInfo,
-                usernameErrorMessage: 'Too short',
-                usernameIsValid: false
+            setUsernameInfo((usernameInformations) => {
+                const currentUsernameInformations = {
+                    ...usernameInformations,
+                    usernameErrorMessage: 'Too short',
+                    usernameIsValid: false
+                }
+
+                return currentUsernameInformations
             })
         } else {
             setUsernameInfo({
