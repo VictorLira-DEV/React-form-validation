@@ -219,17 +219,24 @@ const FormValidation = function () {
                 return currentUsernameInformations
             })
         } else {
-            setUsernameInfo({
-                ...usernameInfo,
-                usernameIsValid: true
+            setUsernameInfo((usernameInformations) => {
+                const currentUsernameInformations = {
+                    ...usernameInformations,
+                    usernameIsValid: true
+                }
+                return currentUsernameInformations
             })
         }
 
         if (emailInfo.emailInput.length < 5) {
-            setEmailInfo({
-                ...emailInfo,
-                emailErrorMessage: 'invalid E-mail address',
-                IsEmailValid: false
+            setEmailInfo((emailInformations) => {
+                const currentEmailInformations = {
+                    ...emailInformations,
+                    emailErrorMessage: 'Invalid E-mail address',
+                    IsEmailValid: false
+                }
+                
+                return currentEmailInformations
             })
         }
 
