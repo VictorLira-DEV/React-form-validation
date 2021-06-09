@@ -46,23 +46,38 @@ const FormValidation = function () {
     function onUsername(e) {
         e.preventDefault();
         
-        setUsernameInfo({
-            ...usernameInfo,
-            usernameInput: e.target.value
+        setUsernameInfo((userInfo) => {
+            const currentUserInput = ({
+                ...userInfo,
+                usernameInput: e.target.value
+            })
+            return currentUserInput;
         });
         if (usernameInfo.usernameInput.trim().length === 0 || usernameInfo.usernameInput.trim().length < 5) {
-            setUsernameInfo({
-                usernameInput: e.target.value,
-                usernameErrorMessage: 'Too short',
-                usernameIsValid: false
+            setUsernameInfo((userInfo) => {
+                const currentUserInput = {
+                    ...userInfo,
+                    usernameIsValid: false,
+                    usernameErrorMessage: 'Too short'
+                }
+                return currentUserInput;
             });
         } else {
-            setUsernameInfo({
-                usernameInput: e.target.value,
-                usernameErrorMessage: '',
-                usernameIsValid: true
+            setUsernameInfo((userInfo) => {
+                const currentUserInput = {
+                    ...userInfo, usernameIsValid: true
+                }
+                return currentUserInput;
             });
         }
+
+        setUsernameInfo((userInfo) => {
+            const currentUserInput = ({
+                ...userInfo,
+                usernameInput: e.target.value
+            })
+            return currentUserInput;
+        });
     }
 
     //Is email
