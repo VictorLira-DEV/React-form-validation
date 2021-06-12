@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Button = styled.button`
     background-color: #8e44ad;
@@ -10,15 +10,13 @@ const Button = styled.button`
     border-radius: 4px;
     font-size: 16px;
     margin-top: 40px;
-    transition: .5s;
+    transition: 0.5s;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 
-    &:hover{
+    &:hover {
         background-color: #783496;
-    }  
-`
-
-
+    }
+`;
 
 export default Button;
