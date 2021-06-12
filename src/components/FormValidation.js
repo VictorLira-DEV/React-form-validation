@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Button from './Button';
 import FormInput from './FormInput';
+import UsernameInfo from './UsernameInfo';
+import EmailInfo from './EmailInfo'
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -18,17 +20,6 @@ const Form = styled.form`
     }
 `
 const FormValidation = function () {
-    const [usernameInfo, setUsernameInfo] = useState({
-        usernameInput:'',
-        usernameErrorMessage:'',
-        usernameIsValid: true,
-    });
-
-    const [emailInfo, setEmailInfo] = useState({
-        emailInput: '',
-        emailErrorMessage: '',
-        IsEmailValid: true
-    });
 
     
     const [passwordCheckInfo, setPasswordCheckInfo] = useState({
@@ -43,86 +34,11 @@ const FormValidation = function () {
         isPasswordValid: true
     });
 
-    function onUsername(e) {
-        e.preventDefault();
-        
-        setUsernameInfo((userInfo) => {
-            const currentUserInput = ({
-                ...userInfo,
-                usernameInput: e.target.value
-            })
-            return currentUserInput;
-        });
-        if (usernameInfo.usernameInput.trim().length === 0 || usernameInfo.usernameInput.trim().length < 5) {
-            setUsernameInfo((userInfo) => {
-                const currentUserInput = {
-                    ...userInfo,
-                    usernameIsValid: false,
-                    usernameErrorMessage: 'Too short'
-                }
-                return currentUserInput;
-            });
-        } else {
-            setUsernameInfo((userInfo) => {
-                const currentUserInput = {
-                    ...userInfo, usernameIsValid: true
-                }
-                return currentUserInput;
-            });
-        }
+    
 
-        setUsernameInfo((userInfo) => {
-            const currentUserInput = ({
-                ...userInfo,
-                usernameInput: e.target.value
-            })
-            return currentUserInput;
-        });
-    }
 
-    //Is email
-    function isEmailTrue(email){
-        return (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email))
-   }
 
-    function emailValidation(e) {
-        e.preventDefault();
-        setEmailInfo((emailInformation) => {
-            const currentEmailInput = {
-                ...emailInformation,
-                emailInput: e.target.value
-            }
-            return currentEmailInput
-        });
-
-        if (!isEmailTrue(emailInfo.emailInput)) {
-            setEmailInfo((emailInformation) => {
-                let currentEmailInput = {
-                    ...emailInformation,
-                    emailErrorMessage: 'Invalid E-mail address',
-                    IsEmailValid: false
-                }
-                return currentEmailInput
-            })
-        } else {
-            setEmailInfo((emailInformation) => {
-                const currentEmailInput = {
-                    ...emailInformation,
-                    IsEmailValid: true
-                }
-
-                return currentEmailInput;
-            })
-        }
-
-        setEmailInfo((emailInformation) => {
-            const currentEmailInput = {
-                ...emailInformation,
-                emailInput: e.target.value
-            }
-            return currentEmailInput
-        });
-    }
+    
 
     function onPassword(e) {
         e.preventDefault();
@@ -191,108 +107,90 @@ const FormValidation = function () {
     function onSubmitHandler(e) {
         e.preventDefault();
 
-        setUsernameInfo((usernameInformations) => {
-            const currentUsernameInformations = {
-                ...usernameInformations,
-                usernameInput: e.target.value
-            }
-            return currentUsernameInformations;
-        })
+    //     setUsernameInfo((usernameInformations) => {
+    //         const currentUsernameInformations = {
+    //             ...usernameInformations,
+    //             usernameInput: e.target.value
+    //         }
+    //         return currentUsernameInformations;
+    //     })
 
-        if (usernameInfo.usernameInput.trim().length === 0) {
-            setUsernameInfo((usernameInformations) => {
-                const currentUsernameInformations = {
-                    ...usernameInformations,
-                    usernameIsValid: e.target.value
-                }
+    //     if (usernameInfo.usernameInput.trim().length === 0) {
+    //         setUsernameInfo((usernameInformations) => {
+    //             const currentUsernameInformations = {
+    //                 ...usernameInformations,
+    //                 usernameIsValid: false,
+    //                 usernameErrorMessage: 'Username cannot be blank'
+    //             }
                 
-                return currentUsernameInformations
-            });
-        } else if (usernameInfo.usernameInput.trim().length < 5) {
-            setUsernameInfo((usernameInformations) => {
-                const currentUsernameInformations = {
-                    ...usernameInformations,
-                    usernameErrorMessage: 'Too short',
-                    usernameIsValid: false
-                }
+    //             return currentUsernameInformations
+    //         });
+    //     } else if (usernameInfo.usernameInput.trim().length < 5) {
+    //         setUsernameInfo((usernameInformations) => {
+    //             const currentUsernameInformations = {
+    //                 ...usernameInformations,
+    //                 usernameErrorMessage: 'Too short',
+    //                 usernameIsValid: false
+    //             }
 
-                return currentUsernameInformations
-            })
-        } else {
-            setUsernameInfo((usernameInformations) => {
-                const currentUsernameInformations = {
-                    ...usernameInformations,
-                    usernameIsValid: true
-                }
-                return currentUsernameInformations
-            })
-        }
+    //             return currentUsernameInformations
+    //         })
+    //     } else {
+    //         setUsernameInfo((usernameInformations) => {
+    //             const currentUsernameInformations = {
+    //                 ...usernameInformations,
+    //                 usernameIsValid: true
+    //             }
+    //             return currentUsernameInformations
+    //         })
+    //     }
 
-        if (emailInfo.emailInput.length < 5) {
-            setEmailInfo((emailInformations) => {
-                const currentEmailInformations = {
-                    ...emailInformations,
-                    emailErrorMessage: 'Invalid E-mail address',
-                    IsEmailValid: false
-                }
+    //     if (emailInfo.emailInput.length < 5) {
+    //         setEmailInfo((emailInformations) => {
+    //             const currentEmailInformations = {
+    //                 ...emailInformations,
+    //                 emailErrorMessage: 'Invalid E-mail address',
+    //                 IsEmailValid: false
+    //             }
                 
-                return currentEmailInformations
-            })
-        }
+    //             return currentEmailInformations
+    //         })
+    //     }
 
-        if(passwordInfo.passwordInput.trim().length < 5){
-            setPasswordInfo({
-                ...passwordInfo,
-                isPasswordValid: false,
-                passwordErrorMessage: 'Weak password',
-            })
-        } else {
-            setPasswordInfo({
-                ...passwordInfo,
-                isPasswordValid: true,
-                passwordErrorMessage: '',
-            })
-        }
+    //     if(passwordInfo.passwordInput.trim().length < 5){
+    //         setPasswordInfo({
+    //             ...passwordInfo,
+    //             isPasswordValid: false,
+    //             passwordErrorMessage: 'Weak password',
+    //         })
+    //     } else {
+    //         setPasswordInfo({
+    //             ...passwordInfo,
+    //             isPasswordValid: true,
+    //             passwordErrorMessage: '',
+    //         })
+    //     }
 
-        if (passwordCheckInfo.passwordCheckInput != passwordInfo.passwordInput || passwordCheckInfo.passwordCheckInput.length < 5) {
-            setPasswordCheckInfo({
-                ...passwordCheckInfo,
-                isPasswordCheckValid: false,
-                passwordCheckErrorMessage: "The password doesn't match"
-            })
-        } else {
-            setPasswordCheckInfo({
-                ...passwordCheckInfo,
-                isPasswordCheckValid: true
-            })
-        }
-
-    }
+    //     if (passwordCheckInfo.passwordCheckInput != passwordInfo.passwordInput || passwordCheckInfo.passwordCheckInput.length < 5) {
+    //         setPasswordCheckInfo({
+    //             ...passwordCheckInfo,
+    //             isPasswordCheckValid: false,
+    //             passwordCheckErrorMessage: "The password doesn't match"
+    //         })
+    //     } else {
+    //         setPasswordCheckInfo({
+    //             ...passwordCheckInfo,
+    //             isPasswordCheckValid: true
+    //         })
+    //     }
+ }
 
     return (
         <Form onSubmit={onSubmitHandler}>
             <h2> Create account </h2>
-            <FormInput
-                className={`formControl`}
-                booleano={!usernameInfo.usernameIsValid}
-                type="text"
-                onChangeHandler={onUsername}
-                placeholder='Username'
-                errorMessage={`${usernameInfo.usernameErrorMessage}`}
-                id="username" >
-                Username
-            </FormInput>
+            <UsernameInfo></UsernameInfo>
 
-            <FormInput
-                className={`formControl`}
-                booleano={!emailInfo.IsEmailValid}
-                type="email"
-                onChangeHandler={emailValidation}
-                placeholder='example@gmail.com'
-                errorMessage={emailInfo.emailErrorMessage}
-                id="email" >
-                E-mail
-            </FormInput>
+            <EmailInfo></EmailInfo>
 
             <FormInput
                 className={`formControl`}
