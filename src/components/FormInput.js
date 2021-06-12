@@ -1,31 +1,28 @@
-import ErrorMessage from "./ErrorMessage";
-import styled from "styled-components";
+import ErrorMessage from './ErrorMessage';
+import styled from 'styled-components';
 
 const FormControl = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 25px;
     position: relative;
-
-    & label {
+    & label{
         display: inline-block;
         margin-bottom: 3px;
         color: rgb(68, 68, 68);
     }
-
-    & input {
+    & input{
         padding: 10px;
-        border: 1px solid ${(props) => (props.isvalid ? "red" : "#ccc")};
+        border: 1px solid ${props => (props.isvalid ? 'red' : '#ccc')};
         outline: none;
     }
-
-    & small {
+    & small{
         position: absolute;
         bottom: -20px;
         color: red;
-        visibility: ${(props) => (props.isvalid ? "visible" : "hidden")};
+        visibility: ${props => (props.isvalid ? 'visible' : 'hidden')};
     }
-`;
+`
 
 function FormInput(props) {
     return (
@@ -37,8 +34,8 @@ function FormInput(props) {
                 onChange={props.onChangeHandler}
                 placeholder={props.placeholder}
             />
-            <ErrorMessage>{props.errorMessage}</ErrorMessage>
+            <ErrorMessage>{ props.errorMessage }</ErrorMessage>
         </FormControl>
-    );
+    )
 }
 export default FormInput;

@@ -1,10 +1,7 @@
-import { useState } from "react";
-import Button from "./Button";
-import PasswordCheckInfo from "./PasswordCheckInfo";
-import UsernameInfo from "./UsernameInfo";
-import EmailInfo from "./EmailInfo";
-import PasswordInfo from "./PasswordInfo";
-import styled from "styled-components";
+import { useState } from 'react';
+import Button from './Button';
+import FormInput from './FormInput';
+import styled from 'styled-components';
 
 const Form = styled.form`
     border: 1px solid #ccc;
@@ -14,104 +11,312 @@ const Form = styled.form`
     font-size: 16px;
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-
-    & h2 {
+    & h2{
         margin-bottom: 30px;
         color: rgb(68, 68, 68);
     }
-`;
+`
 const FormValidation = function () {
+    const [usernameInfo, setUsernameInfo] = useState({
+        usernameInput:'',
+        usernameErrorMessage:'',
+        usernameIsValid: true,
+    });
+
+    const [emailInfo, setEmailInfo] = useState({
+        emailInput: '',
+        emailErrorMessage: '',
+        IsEmailValid: true
+    });
+
+    
+    const [passwordCheckInfo, setPasswordCheckInfo] = useState({
+        passwordCheckInput: '',
+        passwordCheckErrorMessage: '',
+        isPasswordCheckValid: true
+    });
+    
+    const [passwordInfo, setPasswordInfo] = useState({
+        passwordInput: '',
+        passwordErrorMessage: '',
+        isPasswordValid: true
+    });
+
+    function onUsername(e) {
+        e.preventDefault();
+        
+        setUsernameInfo((userInfo) => {
+            const currentUserInput = ({
+                ...userInfo,
+                usernameInput: e.target.value
+            })
+            return currentUserInput;
+        });
+        if (usernameInfo.usernameInput.trim().length === 0 || usernameInfo.usernameInput.trim().length < 5) {
+            setUsernameInfo((userInfo) => {
+                const currentUserInput = {
+                    ...userInfo,
+                    usernameIsValid: false,
+                    usernameErrorMessage: 'Too short'
+                }
+                return currentUserInput;
+            });
+        } else {
+            setUsernameInfo((userInfo) => {
+                const currentUserInput = {
+                    ...userInfo, usernameIsValid: true
+                }
+                return currentUserInput;
+            });
+        }
+
+        setUsernameInfo((userInfo) => {
+            const currentUserInput = ({
+                ...userInfo,
+                usernameInput: e.target.value
+            })
+            return currentUserInput;
+        });
+    }
+
+    //Is email
+    function isEmailTrue(email){
+        return (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email))
+   }
+
+    function emailValidation(e) {
+        e.preventDefault();
+        setEmailInfo((emailInformation) => {
+            const currentEmailInput = {
+                ...emailInformation,
+                emailInput: e.target.value
+            }
+            return currentEmailInput
+        });
+
+        if (!isEmailTrue(emailInfo.emailInput)) {
+            setEmailInfo((emailInformation) => {
+                let currentEmailInput = {
+                    ...emailInformation,
+                    emailErrorMessage: 'Invalid E-mail address',
+                    IsEmailValid: false
+                }
+                return currentEmailInput
+            })
+        } else {
+            setEmailInfo((emailInformation) => {
+                const currentEmailInput = {
+                    ...emailInformation,
+                    IsEmailValid: true
+                }
+
+                return currentEmailInput;
+            })
+        }
+
+        setEmailInfo((emailInformation) => {
+            const currentEmailInput = {
+                ...emailInformation,
+                emailInput: e.target.value
+            }
+            return currentEmailInput
+        });
+    }
+
+    function onPassword(e) {
+        e.preventDefault();
+        
+        setPasswordInfo({
+            ...passwordInfo,
+            passwordInput: e.target.value
+        });
+
+         if(passwordInfo.passwordInput.trim().length < 5){
+            setPasswordInfo({
+                passwordInput: e.target.value,
+                isPasswordValid: false,
+                passwordErrorMessage: 'Weak password'
+            });
+        } else if (passwordInfo.passwordInput.trim().length >= 5) {
+            setPasswordInfo({
+                passwordInput: e.target.value,
+                passwordErrorMessage: '',
+                isPasswordValid: true
+            })
+        }
+    }
+
+    function checkPassword(e) {
+        e.preventDefault();
+
+        setPasswordCheckInfo((passwordInformations) => {
+            const currentPasswordInformations = {
+                ...passwordInformations,
+                passwordCheckInput: e.target.value
+            }
+            return currentPasswordInformations
+        })
+
+        if (passwordCheckInfo.passwordCheckInput.length < 5 ) {
+            setPasswordCheckInfo((passwordInformations) => {
+                const currentPasswordInformations = {
+                    ...passwordInformations,
+                    isPasswordCheckValid: false,
+                    passwordCheckErrorMessage: 'weak password'
+                }
+                return currentPasswordInformations;
+            });
+
+        } else if(passwordCheckInfo.passwordCheckInput.length >= 5){
+            setPasswordCheckInfo((passwordInformations) => {
+                const currentPasswordInformations = {
+                    ...passwordInformations,
+                    isPasswordCheckValid: true
+                }
+                return currentPasswordInformations
+            })
+        }
+
+        setPasswordCheckInfo((passwordInformations) => {
+            const currentPasswordInformations = {
+                ...passwordInformations,
+                passwordCheckInput: e.target.value
+            }
+            return currentPasswordInformations
+        })
+
+    }
+
     function onSubmitHandler(e) {
         e.preventDefault();
 
-        //     setUsernameInfo((usernameInformations) => {
-        //         const currentUsernameInformations = {
-        //             ...usernameInformations,
-        //             usernameInput: e.target.value
-        //         }
-        //         return currentUsernameInformations;
-        //     })
+        setUsernameInfo((usernameInformations) => {
+            const currentUsernameInformations = {
+                ...usernameInformations,
+                usernameInput: e.target.value
+            }
+            return currentUsernameInformations;
+        })
 
-        //     if (usernameInfo.usernameInput.trim().length === 0) {
-        //         setUsernameInfo((usernameInformations) => {
-        //             const currentUsernameInformations = {
-        //                 ...usernameInformations,
-        //                 usernameIsValid: false,
-        //                 usernameErrorMessage: 'Username cannot be blank'
-        //             }
+        if (usernameInfo.usernameInput.trim().length === 0) {
+            setUsernameInfo((usernameInformations) => {
+                const currentUsernameInformations = {
+                    ...usernameInformations,
+                    usernameIsValid: e.target.value
+                }
+                
+                return currentUsernameInformations
+            });
+        } else if (usernameInfo.usernameInput.trim().length < 5) {
+            setUsernameInfo((usernameInformations) => {
+                const currentUsernameInformations = {
+                    ...usernameInformations,
+                    usernameErrorMessage: 'Too short',
+                    usernameIsValid: false
+                }
 
-        //             return currentUsernameInformations
-        //         });
-        //     } else if (usernameInfo.usernameInput.trim().length < 5) {
-        //         setUsernameInfo((usernameInformations) => {
-        //             const currentUsernameInformations = {
-        //                 ...usernameInformations,
-        //                 usernameErrorMessage: 'Too short',
-        //                 usernameIsValid: false
-        //             }
+                return currentUsernameInformations
+            })
+        } else {
+            setUsernameInfo((usernameInformations) => {
+                const currentUsernameInformations = {
+                    ...usernameInformations,
+                    usernameIsValid: true
+                }
+                return currentUsernameInformations
+            })
+        }
 
-        //             return currentUsernameInformations
-        //         })
-        //     } else {
-        //         setUsernameInfo((usernameInformations) => {
-        //             const currentUsernameInformations = {
-        //                 ...usernameInformations,
-        //                 usernameIsValid: true
-        //             }
-        //             return currentUsernameInformations
-        //         })
-        //     }
+        if (emailInfo.emailInput.length < 5) {
+            setEmailInfo((emailInformations) => {
+                const currentEmailInformations = {
+                    ...emailInformations,
+                    emailErrorMessage: 'Invalid E-mail address',
+                    IsEmailValid: false
+                }
+                
+                return currentEmailInformations
+            })
+        }
 
-        //     if (emailInfo.emailInput.length < 5) {
-        //         setEmailInfo((emailInformations) => {
-        //             const currentEmailInformations = {
-        //                 ...emailInformations,
-        //                 emailErrorMessage: 'Invalid E-mail address',
-        //                 IsEmailValid: false
-        //             }
+        if(passwordInfo.passwordInput.trim().length < 5){
+            setPasswordInfo({
+                ...passwordInfo,
+                isPasswordValid: false,
+                passwordErrorMessage: 'Weak password',
+            })
+        } else {
+            setPasswordInfo({
+                ...passwordInfo,
+                isPasswordValid: true,
+                passwordErrorMessage: '',
+            })
+        }
 
-        //             return currentEmailInformations
-        //         })
-        //     }
+        if (passwordCheckInfo.passwordCheckInput != passwordInfo.passwordInput || passwordCheckInfo.passwordCheckInput.length < 5) {
+            setPasswordCheckInfo({
+                ...passwordCheckInfo,
+                isPasswordCheckValid: false,
+                passwordCheckErrorMessage: "The password doesn't match"
+            })
+        } else {
+            setPasswordCheckInfo({
+                ...passwordCheckInfo,
+                isPasswordCheckValid: true
+            })
+        }
 
-        //     if(passwordInfo.passwordInput.trim().length < 5){
-        //         setPasswordInfo({
-        //             ...passwordInfo,
-        //             isPasswordValid: false,
-        //             passwordErrorMessage: 'Weak password',
-        //         })
-        //     } else {
-        //         setPasswordInfo({
-        //             ...passwordInfo,
-        //             isPasswordValid: true,
-        //             passwordErrorMessage: '',
-        //         })
-        //     }
-
-        //     if (passwordCheckInfo.passwordCheckInput != passwordInfo.passwordInput || passwordCheckInfo.passwordCheckInput.length < 5) {
-        //         setPasswordCheckInfo({
-        //             ...passwordCheckInfo,
-        //             isPasswordCheckValid: false,
-        //             passwordCheckErrorMessage: "The password doesn't match"
-        //         })
-        //     } else {
-        //         setPasswordCheckInfo({
-        //             ...passwordCheckInfo,
-        //             isPasswordCheckValid: true
-        //         })
-        //     }
     }
 
     return (
         <Form onSubmit={onSubmitHandler}>
             <h2> Create account </h2>
-            <UsernameInfo></UsernameInfo>
-            <EmailInfo></EmailInfo>
-            <PasswordInfo></PasswordInfo>
-            <PasswordCheckInfo></PasswordCheckInfo>
+            <FormInput
+                className={`formControl`}
+                booleano={!usernameInfo.usernameIsValid}
+                type="text"
+                onChangeHandler={onUsername}
+                placeholder='Username'
+                errorMessage={`${usernameInfo.usernameErrorMessage}`}
+                id="username" >
+                Username
+            </FormInput>
+
+            <FormInput
+                className={`formControl`}
+                booleano={!emailInfo.IsEmailValid}
+                type="email"
+                onChangeHandler={emailValidation}
+                placeholder='example@gmail.com'
+                errorMessage={emailInfo.emailErrorMessage}
+                id="email" >
+                E-mail
+            </FormInput>
+
+            <FormInput
+                className={`formControl`}
+                booleano={!passwordInfo.isPasswordValid}
+                type="password"
+                onChangeHandler={onPassword}
+                placeholder='password'
+                errorMessage={`${passwordInfo.passwordErrorMessage}`}
+                id="password" >
+                Password
+            </FormInput>
+            
+            <FormInput
+                className={`formControl`}
+                booleano={!passwordCheckInfo.isPasswordCheckValid}
+                type="password"
+                onChangeHandler={checkPassword}
+                errorMessage={passwordCheckInfo.passwordCheckErrorMessage}
+                placeholder='password check'
+                id="passwordCheck" >
+                Password Check
+            </FormInput>
             <Button type="submit">Submit</Button>
         </Form>
-    );
-};
+    )
+}
 
 export default FormValidation;
