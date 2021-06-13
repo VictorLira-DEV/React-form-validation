@@ -86,30 +86,30 @@ const FormValidation = function () {
             };
             return currentUserInput;
         });
-
+        console.log(usernameInfo.isUsernameValid)
         //username
-        if (usernameInfo.usernameInput.trim().length >= 5) {
+        if (usernameInfo.usernameInput.length >= 5) {
             setUsernameInfo((userInfo) => {
                 const currentUserInput = {
                     ...userInfo,
                     isUsernameValid: true,
+                };
+                return currentUserInput;
+            });
+        }
+        
+        if (hasWhiteSpace(usernameInfo.usernameInput)) {
+            setUsernameInfo((userInfo) => {
+                const currentUserInput = {
+                    ...userInfo,
+                    usernameErrorMessage: 'remove white space',
+                    isUsernameValid: false,
                 };
                 return currentUserInput;
             });
         }
 
-        if (!hasWhiteSpace) {
-            setUsernameInfo((userInfo) => {
-                const currentUserInput = {
-                    ...userInfo,
-                    usernameErrorMessage: "",
-                    isUsernameValid: true,
-                };
-                return currentUserInput;
-            });
-        }
     }
-
     //Is email
     function isEmailTrue(email) {
         return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
