@@ -1,15 +1,15 @@
 # Form validation
 
 <h1 align="center" >
-<img alt="form validation" src="github/form.JPG"  /> 
+<img width="600px" alt="form validation" src="github/form.JPG"  /> 
 
 ---
 
-<img alt="form validation invalid" src="github/formInvalid.JPG"  />
+<img width="600px" alt="form validation invalid" src="github/formInvalid.JPG"  />
 </h1>
 
 ## :mag: About
-
+a simple form validation, I created this form to study how we can add classes and styles dynamically.
 
 ---
 
@@ -22,5 +22,4 @@
 	<img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg" alt="css3" width="70" height="70"/>
 </p>
 
-
-developer -> **Victor lira dev**
+ **Victor lira dev**
