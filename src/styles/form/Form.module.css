@@ -1,0 +1,89 @@
+.form {
+  margin: 3% auto;
+  border: 1px solid #ccc;
+  background: white;
+  padding: 30px 40px;
+  width: 400px;
+  font-size: 16px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.form h2 {
+  margin-bottom: 30px;
+  color: #444444;
+}
+
+.form .form_control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-bottom: 22px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.form .form_control.invalid input {
+  border: 1px solid red;
+}
+
+.form .form_control.invalid small {
+  color: red;
+  visibility: visible;
+}
+
+.form .form_control label {
+  display: inline-block;
+  margin-bottom: 3px;
+  color: #444444;
+}
+
+.form .form_control input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.form .form_control small {
+  position: absolute;
+  bottom: 1px;
+  visibility: hidden;
+}
+
+.form .button {
+  margin-top: 30px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.form .button.formInvalid {
+  background: #ccc;
+  color: white;
+  border: none;
+  cursor: not-allowed;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.form .button.formInvalid:hover {
+  background-color: #b6b6b6;
+}
+
+.form .button.formValid {
+  background-color: #8e44ad;
+  border: none;
+  color: white;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+.form .button.formValid:hover {
+  background-color: #783496;
+}
+/*# sourceMappingURL=Form.module.css.map */

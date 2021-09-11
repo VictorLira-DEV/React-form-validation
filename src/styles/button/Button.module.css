@@ -1,0 +1,17 @@
+.button {
+  color: #fff;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 30px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #783496;
+}
+/*# sourceMappingURL=Button.module.css.map */
