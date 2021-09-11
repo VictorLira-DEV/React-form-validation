@@ -9,7 +9,8 @@ type IformTypes = {
         | "PASSWORD_BLUR"
         | "PASSWORD_CHECK_CHANGE"
         | "PASSWORD_INVALID_CHANGE"
-        | "PASSWORD_VALID_CHANGE";
+        | "PASSWORD_VALID_CHANGE"
+        | "CLEAR_INPUT";
 };
 
 type IformState = {
@@ -23,41 +24,41 @@ export const FormReducer = (state: IformState, action: IformTypes) => {
             return {
                 value: action.val,
                 isValid: action.val.trim().length > 5,
-                errorMessage: "",
+                errorMessage: "Username must contain at least 6 characters",
             };
         case "USERNAME_BLUR":
             return {
                 value: state.value,
                 isValid: state.value.trim().length > 5,
-                errorMessage: "",
+                errorMessage: "Username can not be blank",
             };
 
         case "EMAIL_CHANGE":
             return {
                 value: action.val,
                 isValid: action.val.trim().includes(".com"),
-                errorMessage: "",
+                errorMessage: "invalid Email",
             };
 
         case "EMAIL_BLUR":
             return {
                 value: state.value,
                 isValid: state.value.trim().includes(".com"),
-                errorMessage: "",
+                errorMessage: "E-mail can not be blank",
             };
 
         case "PASSWORD_CHANGE":
             return {
                 value: action.val,
                 isValid: action.val.trim().length > 5,
-                errorMessage: "",
+                errorMessage: "Password must contain at least 6 characters",
             };
 
         case "PASSWORD_BLUR":
             return {
                 value: state.value,
                 isValid: state.value.trim().length > 5,
-                errorMessage: "",
+                errorMessage: "Password cannot be blank",
             };
 
         case "PASSWORD_CHECK_CHANGE":
@@ -79,6 +80,13 @@ export const FormReducer = (state: IformState, action: IformTypes) => {
                 isValid: true,
                 errorMessage: "",
             };
+
+        case "CLEAR_INPUT": 
+            return{ 
+                value: "", 
+                isValid: "", 
+                errorMessage: "" 
+            }
         default: {
             return { value: "", isValid: "", errorMessage: "" };
         }

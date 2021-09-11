@@ -22,6 +22,7 @@
         &.invalid {
             input {
                 border: 1px solid red;
+                background: rgb(252, 233, 233);
             }
             small {
                 color: red;
@@ -30,6 +31,13 @@
         }
 
         &.valid {
+            input {
+                border: 1px solid rgb(0, 255, 34);
+            }
+
+            small {
+                visibility: hidden;
+            }
         }
 
         label {

@@ -30,11 +30,20 @@
 
 .form .form_control.invalid input {
   border: 1px solid red;
+  background: #fce9e9;
 }
 
 .form .form_control.invalid small {
   color: red;
   visibility: visible;
+}
+
+.form .form_control.valid input {
+  border: 1px solid #00ff22;
+}
+
+.form .form_control.valid small {
+  visibility: hidden;
 }
 
 .form .form_control label {

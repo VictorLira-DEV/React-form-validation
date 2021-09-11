@@ -165,8 +165,10 @@ export const FormProvider = (props: any) => {
     function submitUser() {
         if (usernameValid && emailValid && paswordValid && passwordCheckValid) {
             alert("Be welcome");
-        } else {
-            return;
+            dispatchUsernameState({type: "CLEAR_INPUT", val: ""})
+            dispatchEmailState({type: "CLEAR_INPUT", val: ""})
+            dispatchPassword({type: "CLEAR_INPUT", val: ""})
+            dispatchPasswordCheck({type: "CLEAR_INPUT", val: ""})
         }
     }
 

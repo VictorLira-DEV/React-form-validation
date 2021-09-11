@@ -65,47 +65,47 @@ const Form: React.FC = () => {
             <h2> Create Account </h2>
             <FormField
                 className={`${styles.form_control} ${
-                    usernameState.isValid === false ? styles.invalid : ""
-                }`}
+                    usernameState.isValid === false && styles.invalid
+                } ${usernameState.isValid === true && styles.valid} `}
                 label="Username"
                 id="username"
                 type="text"
                 htmlFor="username"
-                small=""
+                small={usernameState.errorMessage}
                 value={usernameState.value}
                 onChange={onUsernameChange}
                 onBlur={onUsernameBlur}
             />
             <FormField
                 className={`${styles.form_control} ${
-                    emailState.isValid === false ? styles.invalid : ""
-                }`}
+                    emailState.isValid === false && styles.invalid
+                } ${emailState.isValid === true && styles.valid}`}
                 label="E-mail"
                 id="email"
                 type="email"
                 htmlFor="email"
-                small=""
+                small={emailState.errorMessage}
                 value={emailState.value}
                 onChange={onEmailChange}
                 onBlur={onEmailBlur}
             />
             <FormField
                 className={`${styles.form_control} ${
-                    passwordState.isValid === false ? styles.invalid : ""
-                }`}
+                    passwordState.isValid === false && styles.invalid
+                } ${passwordState.isValid === true && styles.valid} `}
                 label="Password"
                 id="password"
                 type="password"
                 htmlFor="password"
-                small=""
+                small={passwordState.errorMessage}
                 value={passwordState.value}
                 onChange={onPasswordChange}
                 onBlur={onPasswordBlur}
             />
             <FormField
                 className={`${styles.form_control} ${
-                    passwordCheckState.isValid === false ? styles.invalid : ""
-                }`}
+                    passwordCheckState.isValid === false && styles.invalid
+                } ${passwordCheckState.isValid === true && styles.valid} `}
                 label="Password Check"
                 id="password2"
                 type="password"
