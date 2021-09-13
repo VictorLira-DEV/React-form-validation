@@ -9,7 +9,7 @@
 </h1>
 
 ## :mag: About
-a simple form validation, I created this form to study how we can add classes and styles dynamically.
+Form validation with Typescript and React, in this project, you can see how typescript and React hooks go together during development!
 
 ---
 
