@@ -2,7 +2,7 @@
 
 
 <h2 align="center"> 
-        Personal Project ✔️
+       😎Personal Project ✔️
 </h2>
 <br>
 <h1 align="center" >
