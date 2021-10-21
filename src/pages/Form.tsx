@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import styles from "../styles/form/Form.module.css";
-import Button from "../components/UI/Button";
-import FormField from "./FormField";
-import { FormContext } from "./context/FormState";
+import styles from "../styles/pages/form/Form.module.css";
+import Button from "../components/Button";
+import FormField from "../components/FormField";
+import { FormContext } from "../context/FormState";
 
 const Form: React.FC = () => {
     const {

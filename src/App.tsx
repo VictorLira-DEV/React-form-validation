@@ -1,5 +1,5 @@
-import Form from "../components/Form";
-import { FormProvider } from "../components/context/FormState";
+import Form from "./pages/Form";
+import { FormProvider } from "./context/FormState";
 
 function App() {
     return (

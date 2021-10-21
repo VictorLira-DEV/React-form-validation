@@ -37,14 +37,14 @@ export const FormReducer = (state: IformState, action: IformTypes) => {
             return {
                 value: action.val,
                 isValid: action.val.trim().includes(".com"),
-                errorMessage: "invalid Email",
+                errorMessage: "invalid E-mail",
             };
 
         case "EMAIL_BLUR":
             return {
                 value: state.value,
                 isValid: state.value.trim().includes(".com"),
-                errorMessage: "E-mail can not be blank",
+                errorMessage: "invalid E-mail",
             };
 
         case "PASSWORD_CHANGE":
