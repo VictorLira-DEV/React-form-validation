@@ -1,5 +1,10 @@
 # Form validation
 
+
+<h2 align="center"> 
+        Personal Project ✔️
+</h2>
+<br>
 <h1 align="center" >
 <img width="600px" alt="form validation" src="github/form.JPG"  /> 
 
